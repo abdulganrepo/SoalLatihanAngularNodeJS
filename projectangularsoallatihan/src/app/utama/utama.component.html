@@ -1,0 +1,47 @@
+<br>
+<h6>Tambah Data Customer</h6>
+<form [formGroup]="addDataForm" method="POST">
+    <table>
+        <tr>
+            <td><label for="nama">Nama </label></td>
+            <td><label for="nama" class="col-9"> : </label></td>
+            <td><input class="form-control" type="text" formControlName="nama" placeholder="nama..">
+                <span *ngIf="!addDataForm.get('nama')?.valid && addDataForm.get('nama')?.touched"
+                    class="help-block">Wajib
+                    di isi!</span>
+            </td>
+
+        </tr>
+        <br>
+        <tr>
+            <td><label for="alamat">Alamat </label></td>
+            <td><label for="alamat" class="col-9"> : </label></td>
+            <td><input class="form-control" type="text" formControlName="alamat" placeholder="alamat..">
+                <span *ngIf="!addDataForm.get('alamat')?.valid && addDataForm.get('alamat')?.touched"
+                    class="help-block">Wajib
+                    di isi!</span>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td><label for="kota">Kota </label></td>
+            <td><label for="kota" class="col-9"> : </label></td>
+            <td><input class="form-control" type="text" formControlName="kota" placeholder="kota..">
+                <span *ngIf="!addDataForm.get('kota')?.valid && addDataForm.get('kota')?.touched"
+                    class="help-block">Wajib
+                    di isi!</span>
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td><label for="pendapatan">Pendapatan </label></td>
+            <td><label for="pendapatan" class="col-9"> : </label></td>
+            <td><input class="form-control" type="text" formControlName="pendapatan" placeholder="pendapatan..">
+                <span *ngIf="!addDataForm.get('pendapatan')?.valid && addDataForm.get('pendapatan')?.touched"
+                    class="help-block">Wajib
+                    di isi!</span>
+            </td>
+        </tr>
+        <button type="submit" (click)="simpanData()" class="btn btn-success">{{ isEdit === true? 'Update' : 'Add' }}</button>
+    </table>
+</form>

@@ -1,0 +1,30 @@
+<br>
+<button class="btn btn-info" routerLink="/utama" >Add</button>
+<br>
+<br>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">nama</th>
+            <th scope="col">alamat</th>
+            <th scope="col">kota</th>
+            <th scope="col">pendapatan</th>
+            <th scope="col">action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dc of daftarcustomer">
+            <td>{{dc.id}}</td>
+            <td>{{dc.nama}}</td>
+            <td>{{dc.alamat}}</td>
+            <td>{{dc.kota}}</td>
+            <td>{{dc.pendapatan}}</td>
+            <td>
+                <button class="btn btn-warning" routerLink="/editcustomer/{{dc.id}}" >Edit</button>
+                <br>
+                <button class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
