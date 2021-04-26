@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Customer } from '../model/customer';
 import { MasterService } from '../services/master.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-utama',
@@ -13,15 +14,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UtamaComponent implements OnInit {
   addDataForm!: FormGroup;
   daftarCustomer!: Customer;
-    id! : string;
-  isEdit =  false;
+  id!: string;
+  isEdit = false;
 
   constructor(
     private ruter: Router,
     private route: ActivatedRoute,
-    private ms: MasterService
-  ) { 
-     this.addDataForm = new FormGroup({
+    private ms: MasterService,
+    private toastr: ToastrService
+  ) {
+    this.addDataForm = new FormGroup({
       nama: new FormControl(null, [Validators.required]),
       alamat: new FormControl(null, [Validators.required]),
       kota: new FormControl(null, [Validators.required]),
@@ -32,14 +34,14 @@ export class UtamaComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(hasil => {
       this.id = hasil.id;
-      if (this.id){
+      if (this.id) {
         this.isEdit = true;
-        this.ms.getKelasbyId(this.id).subscribe((data)=>{
-        this.addDataForm.controls.nama.setValue(data[0].nama);
-        this.addDataForm.controls.alamat.setValue(data[0].alamat);
-        this.addDataForm.controls.kota.setValue(data[0].kota);
-        this.addDataForm.controls.pendapatan.setValue(data[0].pendapatan);
-      })
+        this.ms.getKelasbyId(this.id).subscribe((data) => {
+          this.addDataForm.controls.nama.setValue(data[0].nama);
+          this.addDataForm.controls.alamat.setValue(data[0].alamat);
+          this.addDataForm.controls.kota.setValue(data[0].kota);
+          this.addDataForm.controls.pendapatan.setValue(data[0].pendapatan);
+        })
       }
     });
   }
@@ -55,7 +57,10 @@ export class UtamaComponent implements OnInit {
       this.daftarCustomer = CustomertTmp;
       console.log(this.daftarCustomer);
       this.ms.insertCustomer(CustomertTmp).subscribe((data) => {
-        console.log(data);
+        this.toastr.success(data.message, 'Behasil').onTap.subscribe(
+          () => {
+            this.ruter.navigateByUrl("/editcustomer/" + data.key);
+          });
       });
     }
   }

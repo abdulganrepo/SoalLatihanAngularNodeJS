@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 import { UtamaComponent } from './utama/utama.component';
 import { TabelcustomerComponent } from './tabelcustomer/tabelcustomer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DataTablesModule } from "angular-datatables";
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +26,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
